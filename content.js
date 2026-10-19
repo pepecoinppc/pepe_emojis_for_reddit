@@ -16,6 +16,8 @@
   window.__pepeEmojiLoaded = true;
 
   const BTN_CLASS = 'pepe-emoji-btn';
+  const ITEM_CLASS = 'pepe-emoji-item';
+  const ITEM_TAG = 'RTE-TOOLBAR-BUTTON';
   const RECENT_KEY = 'pepeRecent';
   const MAX_RECENT = 18;
   const CHANGE_WAIT_MS = 1200;
@@ -136,6 +138,29 @@
     return node;
   }
 
+  // Reddit wraps each toolbar icon in its own <rte-toolbar-button>. Find the
+  // one that holds the Aa button (it may be across a shadow-root boundary).
+  function toolbarItemFor(btn) {
+    let node = btn;
+    for (let i = 0; i < 8 && node; i++, node = parentOf(node)) {
+      if (node.tagName === ITEM_TAG) return node;
+    }
+    return null;
+  }
+
+  // Our own <rte-toolbar-button>, styled like the original but without
+  // anything that identifies it as the formatting button.
+  function makeToolbarItem(original, button) {
+    const item = document.createElement(original.localName);
+    for (const { name, value } of original.attributes) {
+      if (/^(id|name|title|label|tooltip|data-testid)$|^aria-/.test(name) || /format/i.test(value)) continue;
+      item.setAttribute(name, value);
+    }
+    item.classList.add(ITEM_CLASS);
+    item.append(button);
+    return item;
+  }
+
   function iconSizeFor(btn) {
     const icon = btn.querySelector('svg, img, [icon-name]');
     const h = icon ? Math.round(icon.getBoundingClientRect().height) : 0;
@@ -172,7 +197,7 @@
     });
     b.addEventListener('click', (e) => {
       e.preventDefault();
-      e.stopPropagation();
+      e.stopImmediatePropagation();
       if (picker.isOpenFor(b)) { picker.close(); return; }
       const ctx = findComposer(b);
       if (!ctx) { toast("Couldn't find the comment box for this button."); return; }
@@ -187,11 +212,23 @@
     if (!alive()) { stop(); return; }
     for (const el of deepElements(document.body)) {
       if (!isFormattingButton(el)) continue;
-      const point = insertionPoint(el);
+      const item = toolbarItemFor(el);
+      const point = item || insertionPoint(el);
       const next = point.nextElementSibling;
-      if (next && next.classList.contains(BTN_CLASS)) continue;
+      if (next && (next.classList.contains(BTN_CLASS) || next.classList.contains(ITEM_CLASS))) continue;
       if (!isVisible(el) || !findComposer(el)) continue;
-      point.insertAdjacentElement('afterend', makeButton(el));
+      const button = makeButton(el);
+      if (item) {
+        const wrapper = makeToolbarItem(item, button);
+        item.insertAdjacentElement('afterend', wrapper);
+        // If Reddit's element doesn't display content added this way, fall
+        // back to placing the button on its own right after the Aa item.
+        requestAnimationFrame(() => {
+          if (wrapper.isConnected && !isVisible(button)) wrapper.replaceWith(button);
+        });
+      } else {
+        point.insertAdjacentElement('afterend', button);
+      }
     }
   }
 
@@ -429,7 +466,7 @@
       --bg: #ffffff; --surface: #f2f4f5; --surface-2: #e5ebee; --text: #0f1a1c;
       --muted: #576f76; --border: #d5dde0; --accent: #3f8f3a; --accent-soft: rgba(63,143,58,.14);
       --shadow: 0 12px 40px rgba(0,0,0,.18), 0 2px 8px rgba(0,0,0,.08);
-      position: fixed; width: 360px; height: 430px; display: flex; flex-direction: column;
+      position: fixed; width: 360px; height: 444px; display: flex; flex-direction: column;
       background: var(--bg); color: var(--text); border: 1px solid var(--border);
       border-radius: 16px; box-shadow: var(--shadow); overflow: hidden;
       font: 14px/1.35 "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -443,9 +480,14 @@
     @keyframes pop { from { opacity: 0; transform: translateY(6px) scale(.98); } to { opacity: 1; transform: none; } }
     @media (prefers-reduced-motion: reduce) { .panel { animation: none; } }
 
-    .head { display: flex; align-items: center; gap: 8px; padding: 12px 12px 8px 14px; }
-    .head img { width: 22px; height: 22px; }
-    .title { font-weight: 600; font-size: 14px; flex: 1; letter-spacing: .1px; }
+    .head { display: flex; align-items: center; gap: 10px; padding: 12px 12px 10px 14px; }
+    .head img { width: 30px; height: 30px; }
+    .heading { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+    .title { font-weight: 600; font-size: 14px; letter-spacing: .1px; }
+    .byline { font-size: 12px; color: var(--muted); }
+    .byline a { color: inherit; text-decoration: none; border-radius: 4px; outline-offset: 2px; }
+    .byline a:hover { color: var(--accent); text-decoration: underline; }
+    .byline a:focus-visible { outline: 2px solid var(--accent); }
     .close {
       width: 28px; height: 28px; border-radius: 999px; border: 0; background: transparent;
       color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; display: grid; place-items: center;
@@ -535,7 +577,7 @@
       if (!panel || !anchor) return;
       if (!anchor.isConnected) { close(); return; }
       const r = anchor.getBoundingClientRect();
-      const w = panel.offsetWidth || 360, h = panel.offsetHeight || 430, gap = 8;
+      const w = panel.offsetWidth || 360, h = panel.offsetHeight || 444, gap = 8;
       let left = r.left + r.width / 2 - w / 2;
       left = Math.max(gap, Math.min(left, window.innerWidth - w - gap));
       let top = r.top - h - gap;
@@ -641,7 +683,7 @@
       const root = host.attachShadow({ mode: 'open' });
       root.append(el('style', { text: PICKER_CSS }));
 
-      panel = el('div', { class: `panel${isDarkPage() ? ' dark' : ''}`, role: 'dialog', 'aria-label': 'Pepe emoji picker' });
+      panel = el('div', { class: `panel${isDarkPage() ? ' dark' : ''}`, role: 'dialog', 'aria-label': 'Pepe Emojis for Reddit' });
       const search = el('input', {
         type: 'text', placeholder: 'Search Pepe emojis', 'aria-label': 'Search Pepe emojis', spellcheck: 'false',
         oninput: (e) => { query = e.target.value; render(); },
@@ -661,7 +703,15 @@
       panel.append(
         el('div', { class: 'head' }, [
           el('img', { src: url('icons/pepe-button.png'), alt: '' }),
-          el('div', { class: 'title', text: 'Pepe emojis' }),
+          el('div', { class: 'heading' }, [
+            el('div', { class: 'title', text: 'Pepe Emojis for Reddit' }),
+            el('div', { class: 'byline' }, [
+              'by ',
+              el('a', {
+                href: 'https://pepecoin.com', target: '_blank', rel: 'noopener noreferrer', text: 'Pepecoin.com',
+              }),
+            ]),
+          ]),
           el('button', { class: 'close', type: 'button', 'aria-label': 'Close', title: 'Close', onclick: close, text: '×' }),
         ]),
         el('div', { class: 'search' }, [search]),
