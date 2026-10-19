@@ -1,0 +1,286 @@
+{
+  "static": [
+    {
+      "name": "Awakge",
+      "file": "emojis/static/Awakge.png"
+    },
+    {
+      "name": "Bedge",
+      "file": "emojis/static/Bedge.png"
+    },
+    {
+      "name": "BedGe",
+      "file": "emojis/static/BedGe.png"
+    },
+    {
+      "name": "BedgeTogether",
+      "file": "emojis/static/BedgeTogether.png"
+    },
+    {
+      "name": "BedSmirkge",
+      "file": "emojis/static/BedSmirkge.png"
+    },
+    {
+      "name": "BedSusge",
+      "file": "emojis/static/BedSusge.png"
+    },
+    {
+      "name": "BusinessOkayge",
+      "file": "emojis/static/BusinessOkayge.png"
+    },
+    {
+      "name": "Cryge",
+      "file": "emojis/static/Cryge.png"
+    },
+    {
+      "name": "CryPrayge",
+      "file": "emojis/static/CryPrayge.png"
+    },
+    {
+      "name": "Cumge",
+      "file": "emojis/static/Cumge.png"
+    },
+    {
+      "name": "Deadge",
+      "file": "emojis/static/Deadge.png"
+    },
+    {
+      "name": "Dentge",
+      "file": "emojis/static/Dentge.png"
+    },
+    {
+      "name": "Despairge",
+      "file": "emojis/static/Despairge.png"
+    },
+    {
+      "name": "Evilge",
+      "file": "emojis/static/Evilge.png"
+    },
+    {
+      "name": "Flushge",
+      "file": "emojis/static/Flushge.png"
+    },
+    {
+      "name": "Gayge",
+      "file": "emojis/static/Gayge.png"
+    },
+    {
+      "name": "Ge",
+      "file": "emojis/static/Ge.png"
+    },
+    {
+      "name": "GeHug",
+      "file": "emojis/static/GeHug.png"
+    },
+    {
+      "name": "GeSpecial",
+      "file": "emojis/static/GeSpecial.png"
+    },
+    {
+      "name": "Gladge",
+      "file": "emojis/static/Gladge.png"
+    },
+    {
+      "name": "GrinGe",
+      "file": "emojis/static/GrinGe.png"
+    },
+    {
+      "name": "Hige",
+      "file": "emojis/static/Hige.png"
+    },
+    {
+      "name": "Hmmge",
+      "file": "emojis/static/Hmmge.png"
+    },
+    {
+      "name": "HmmGe",
+      "file": "emojis/static/HmmGe.png"
+    },
+    {
+      "name": "Huhge",
+      "file": "emojis/static/Huhge.png"
+    },
+    {
+      "name": "Looking",
+      "file": "emojis/static/Looking.png"
+    },
+    {
+      "name": "Madge",
+      "file": "emojis/static/Madge.png"
+    },
+    {
+      "name": "MadgeDistort",
+      "file": "emojis/static/MadgeDistort.png"
+    },
+    {
+      "name": "Nerdge",
+      "file": "emojis/static/Nerdge.png"
+    },
+    {
+      "name": "Oldge",
+      "file": "emojis/static/Oldge.png"
+    },
+    {
+      "name": "Pepsige",
+      "file": "emojis/static/Pepsige.png"
+    },
+    {
+      "name": "Phonge",
+      "file": "emojis/static/Phonge.png"
+    },
+    {
+      "name": "Prayge",
+      "file": "emojis/static/Prayge.png"
+    },
+    {
+      "name": "SadBedge",
+      "file": "emojis/static/SadBedge.png"
+    },
+    {
+      "name": "Sadge",
+      "file": "emojis/static/Sadge.png"
+    },
+    {
+      "name": "SadgeNitro",
+      "file": "emojis/static/SadgeNitro.png"
+    },
+    {
+      "name": "SadGeSombrero",
+      "file": "emojis/static/SadGeSombrero.png"
+    },
+    {
+      "name": "Shruge",
+      "file": "emojis/static/Shruge.png"
+    },
+    {
+      "name": "Smadge",
+      "file": "emojis/static/Smadge.png"
+    },
+    {
+      "name": "SmirkAgreege",
+      "file": "emojis/static/SmirkAgreege.png"
+    },
+    {
+      "name": "Smirkge",
+      "file": "emojis/static/Smirkge.png"
+    },
+    {
+      "name": "stopbeingMean",
+      "file": "emojis/static/stopbeingMean.png"
+    },
+    {
+      "name": "StopbeingSpecial",
+      "file": "emojis/static/StopbeingSpecial.png"
+    },
+    {
+      "name": "Susdge",
+      "file": "emojis/static/Susdge.png"
+    },
+    {
+      "name": "SusgeNotes",
+      "file": "emojis/static/SusgeNotes.png"
+    },
+    {
+      "name": "Sushmmge",
+      "file": "emojis/static/Sushmmge.png"
+    },
+    {
+      "name": "Tiredge",
+      "file": "emojis/static/Tiredge.png"
+    },
+    {
+      "name": "Yesdge",
+      "file": "emojis/static/Yesdge.png"
+    }
+  ],
+  "gif": [
+    {
+      "name": "Blushge",
+      "file": "emojis/gif/Blushge.gif"
+    },
+    {
+      "name": "Cheerge",
+      "file": "emojis/gif/Cheerge.gif"
+    },
+    {
+      "name": "Gamabge",
+      "file": "emojis/gif/Gamabge.gif"
+    },
+    {
+      "name": "GeAnnounce",
+      "file": "emojis/gif/GeAnnounce.gif"
+    },
+    {
+      "name": "GeKek",
+      "file": "emojis/gif/GeKek.gif"
+    },
+    {
+      "name": "GeMusicCry",
+      "file": "emojis/gif/GeMusicCry.gif"
+    },
+    {
+      "name": "keepbeingmean",
+      "file": "emojis/gif/keepbeingmean.gif"
+    },
+    {
+      "name": "MadgePointing",
+      "file": "emojis/gif/MadgePointing.gif"
+    },
+    {
+      "name": "MadgeTime",
+      "file": "emojis/gif/MadgeTime.gif"
+    },
+    {
+      "name": "Nerdge",
+      "file": "emojis/gif/Nerdge.gif"
+    },
+    {
+      "name": "Painge",
+      "file": "emojis/gif/Painge.gif"
+    },
+    {
+      "name": "PraygeA",
+      "file": "emojis/gif/PraygeA.gif"
+    },
+    {
+      "name": "SadGePrayLeave",
+      "file": "emojis/gif/SadGePrayLeave.gif"
+    },
+    {
+      "name": "SadGeRain",
+      "file": "emojis/gif/SadGeRain.gif"
+    },
+    {
+      "name": "SadgeRain",
+      "file": "emojis/gif/SadgeRain.gif"
+    },
+    {
+      "name": "SadgeSip",
+      "file": "emojis/gif/SadgeSip.gif"
+    },
+    {
+      "name": "SadgeSmoke",
+      "file": "emojis/gif/SadgeSmoke.gif"
+    },
+    {
+      "name": "SadGeThinking",
+      "file": "emojis/gif/SadGeThinking.gif"
+    },
+    {
+      "name": "stopbeingMean",
+      "file": "emojis/gif/stopbeingMean.gif"
+    },
+    {
+      "name": "SusClap",
+      "file": "emojis/gif/SusClap.gif"
+    },
+    {
+      "name": "VeryMadge",
+      "file": "emojis/gif/VeryMadge.gif"
+    },
+    {
+      "name": "Wankge",
+      "file": "emojis/gif/Wankge.gif"
+    }
+  ]
+}
